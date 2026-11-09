@@ -1,0 +1,37 @@
+---
+title: "Errors and limits"
+description: "Handle API failures, retries, and organization usage limits."
+---
+
+Nini returns errors as `application/problem+json` using the Problem Details format. Use the HTTP status and stable problem fields in application logic; do not parse human-readable detail text.
+
+## Common responses
+
+| Status | Meaning | Action |
+| --- | --- | --- |
+| `401` | The access token is missing, expired, or invalid. | Request a new token and retry once. |
+| `403` | The credential lacks a scope or the API/profile is not enabled. | Check the credential and contact Nini if access is not enabled. |
+| `404` | The extraction does not exist for this organization. | Verify the ID. Do not retry indefinitely. |
+| `410` | The transient extraction result expired. | Submit the source again with a new idempotency key. |
+| `409` | An idempotency key was reused with different input. | Use the original input or a new key. |
+| `422` | File metadata or another request field is invalid. | Correct the request before retrying. |
+| `429` | Edge throttling was reached. | Back off before retrying. |
+| `5xx` | Nini could not complete the request. | Retry with exponential backoff and jitter. |
+
+## Idempotent retries
+
+`POST /v1/extractions` requires an `Idempotency-Key`. Generate one for a logical submission and reuse it if a network error leaves the outcome unknown. A key is scoped to your organization and must not be reused for different file metadata or profiles.
+
+## Usage controls
+
+Nini applies edge throttling and organization-level file-size and profile controls. `GET /v1/usage` reports the number of documents submitted in the current UTC day.
+
+## Billable usage
+
+Billable ingestion usage is measured by the actual number of pages in successfully completed extractions. Failed extractions are not billed. Retrying the same logical extraction with the same idempotency key does not create another charge. Your organization's Settings page shows billing-period pages and estimated charges; the daily document count returned by `GET /v1/usage` is informational.
+
+Retrieve successful results promptly. Nini deletes partner source content after processing. The API stops serving result content within 24 hours, and automated cleanup targets the same retention window with S3 lifecycle expiration as a backstop.
+
+<Note>
+  File-size limits and profiles are assigned during onboarding. Contact Nini before a planned traffic increase rather than designing around repeated `429` responses.
+</Note>

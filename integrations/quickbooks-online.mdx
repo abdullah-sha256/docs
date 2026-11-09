@@ -1,0 +1,30 @@
+---
+title: "Connect QuickBooks Online"
+description: "The QuickBooks connection brings accounting information into Nini so you can compare it with bank activity and supporting documents, and ask Gia questions about the available information."
+---
+
+<Tip>
+**Example:** Compare an imported supplier bill or bill-payment record with the bank payment and the invoice that supports it.
+</Tip>
+
+<Info>
+**Before you start:** Use a QuickBooks account allowed to authorize the intended company. Confirm the Nini organization and make sure the company is not already connected. QuickBooks Desktop has a separate procedure in [Connect QuickBooks Desktop](/integrations/quickbooks-desktop).
+</Info>
+
+## Step by step
+
+1. Open Settings → Integrations → Add integration.
+2. Find QuickBooks. If it is already Connected, use Manage or its existing Connected card and check the linked company instead of creating another connection.
+3. If it is not connected, use the setup action shown on the card. A disabled catalog entry may first offer Enable. Follow the provider connection flow opened by Nini.
+4. Sign in through the provider's authorization screen. Select the intended QuickBooks company and review the requested access before granting it. The exact provider screens can vary.
+5. Complete the provider prompts and return to Nini. Open the QuickBooks card and confirm the connection identifies the company you intended.
+6. Wait for a sync status, then inspect recent activity and a sample record. Compare its date, amount, currency and counterparty with QuickBooks before treating the import as complete.
+7. Use Records to review the imported information and Books to understand the current posting boundary. Posting in the reviewed Nini release writes to Nini's ledger, not back to QuickBooks.
+
+<Check>
+**Expected result:** The intended company is connected and you have checked that representative data has arrived.
+</Check>
+
+<Warning>
+**If you get stuck:** If authorization finishes but records are missing, check sync status, dates and supported record types. Do not repeatedly disconnect and reconnect. Ask your administrator to investigate the existing connection.
+</Warning>

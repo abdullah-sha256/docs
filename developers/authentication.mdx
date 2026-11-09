@@ -1,0 +1,36 @@
+---
+title: "Authentication"
+description: "Use organization-bound OAuth credentials without exposing secrets."
+---
+
+The Nini API uses OAuth 2.0 client credentials for server-to-server access. Each credential belongs to one organization, is locked to one processing region, and receives only its configured scopes.
+
+## Manage credentials
+
+Bookkeepers, Controllers, and Admins can manage credentials in **Nini → Settings → Developer access**. The client secret appears once when a credential is created or rotated.
+
+- Store client secrets in a production secret manager.
+- Request access tokens from the token URL shown in Settings.
+- Send API requests to the base URL shown with the credential.
+- Send the token as `Authorization: Bearer <token>`.
+- Rotate a credential if its secret may have been exposed.
+- Revoke credentials that are no longer used.
+
+<Warning>
+  Never put a client secret or access token in browser code, a mobile application, source control, logs, support messages, or analytics properties.
+</Warning>
+
+## Scopes
+
+| Scope | Allows |
+| --- | --- |
+| `extraction:write` | Create an extraction and receive its upload request. |
+| `extraction:read` | Retrieve extraction state and organization usage. |
+
+Nini derives organization identity and processing region from the credential. Requests cannot select or override either value using a body field or header. A regional endpoint rejects credentials issued for another region.
+
+## Rotation
+
+Rotating a credential invalidates its old secret immediately. Existing extraction IDs remain attached to the organization and can be read with the newly issued credential when it has the required scope.
+
+To change processing regions, revoke all active credentials for the organization and create replacements in the new region.

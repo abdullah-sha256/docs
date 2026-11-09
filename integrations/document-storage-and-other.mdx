@@ -1,0 +1,32 @@
+---
+title: "Use document storage and other integrations"
+description: "Document-storage connections provide another way to bring supporting files into Nini."
+---
+
+Other accounting and ERP connectors can add source information where they are enabled. Choose a connector because it supplies information you need, not simply because it is listed.
+
+<Tip>
+**Example:** If invoices are stored in a shared document service, a document connection may reduce repeated manual uploads. For a one-off file, Upload is simpler.
+</Tip>
+
+<Info>
+**Before you start:** Confirm which source account owns the files or records and what access the connector requests. Do not assume a connection is limited to a folder: the reviewed material does not establish a working folder-only restriction for Google Drive.
+</Info>
+
+## Step by step
+
+1. Open Settings → Integrations → Add integration.
+2. Find the provider. The reviewed catalog showed Google Drive, OneDrive and SharePoint for documents, plus Wave and Workday among the accounting and ERP options.
+3. Open About to read the provider details. A Disabled label means it is not currently enabled; an Enable button is a setup action, not evidence that it is already importing.
+4. If your organization has approved the source and access scope, start the displayed setup action and complete the provider's authorization prompts.
+5. Return to Integrations and check the resulting connection state and Recent activity.
+6. For document sources, open Documents → Browse and find a known file. Check destination and processing status before assuming it is ready for review.
+7. For accounting or ERP sources, inspect an imported record against the source and confirm supported coverage with your administrator.
+
+<Check>
+**Expected result:** You know which connector is in use, what access was granted and whether the expected information has appeared.
+</Check>
+
+<Warning>
+**If you get stuck:** If the requested permissions are broader than intended, cancel setup and ask your administrator to confirm the approved approach. For a limited set of files, use manual upload while access scope is being resolved.
+</Warning>

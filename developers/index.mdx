@@ -16,10 +16,10 @@ Document content is processed through a separate transient storage path. Nini de
     Send the document metadata and your assigned extraction profile. Nini returns an extraction ID and a short-lived upload request.
   </Step>
   <Step title="Upload the document">
-    Upload the exact file directly to the returned URL using the returned method and headers.
+    Upload the exact file directly to the returned URL with the returned `method`, `content_type`, and `content_length`.
   </Step>
   <Step title="Retrieve the result">
-    Poll the extraction by ID until its status is `succeeded` or `failed`.
+    Poll the extraction by ID while it is `awaiting_upload` or `processing`, until its status is `succeeded` or `failed`.
   </Step>
 </Steps>
 
@@ -34,7 +34,9 @@ Document content is processed through a separate transient storage path. Nini de
 
 ## Access
 
-Bookkeepers, Controllers, and Admins can manage API credentials in **Nini → Settings → Developer access**. Credentials are organization-bound and use OAuth 2.0 client credentials. Keep the client secret in a secret manager; Nini displays it only when it is created or rotated.
+Bookkeepers, Controllers, and Admins can manage API credentials in **Nini → Settings → Developer access**. Credentials are organization-bound, locked to a processing region, and use OAuth 2.0 client credentials. Keep the client secret in a secret manager; Nini displays it only when it is created or rotated.
+
+The API is available in two processing regions: Canada (Montreal) at `https://api.nini.io` and the United States (N. Virginia) at `https://api.us.nini.io`. Two profiles are available: [`ocr.v1`](/developers/ocr) for page-preserving text and [`legal_case.v1`](/developers/legal-case-extraction) for typed legal case data.
 
 <Note>
   The documentation describes the stable platform contract. The extraction profiles and limits enabled for your organization are confirmed during onboarding.

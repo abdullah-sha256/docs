@@ -13,13 +13,13 @@ The flow is the same for every profile. Follow the [Quickstart](/developers/quic
 
 ## Result
 
-When the status is `succeeded`, `result` is a `legal_case.v1` object. Optional fields are omitted when not found; list fields are returned empty rather than omitted.
+When the status is `succeeded`, `result` is a `legal_case.v1` object. Optional fields are omitted or `null` when not found; list fields are returned empty rather than omitted.
 
 | Field | Type | Notes |
 | --- | --- | --- |
 | `profile` | string | Always `legal_case.v1`. |
-| `schema_version` | string | Result schema version for this profile. |
-| `document_type` | string | Classified document type, e.g. `complaint`, `order`, `notice`. |
+| `schema_version` | string | Result schema version for this profile, currently `1.1`. |
+| `document_type` | string | Classified document type, e.g. `complaint`, `order`, `notice`. `legal_document` when no specific type is identified. |
 | `case_number` | string? | Docket or case number, when present. |
 | `title` | string? | Case or document title. |
 | `court` | string? | Court name. |
@@ -67,7 +67,7 @@ Used by `deadlines` and `hearing_dates`.
 | Field | Type | Notes |
 | --- | --- | --- |
 | `amount_minor` | integer | Amount in the currency's minor unit (e.g. cents). Divide by the currency's minor-unit factor for the major value. |
-| `currency` | string | ISO 4217 currency code. |
+| `currency` | string | Three-letter uppercase ISO 4217 currency code. |
 | `description` | string | What the amount refers to. |
 
 #### Citation
@@ -76,14 +76,14 @@ Used by `deadlines` and `hearing_dates`.
 | --- | --- | --- |
 | `field` | string | The result field the citation supports, e.g. `case_number`. |
 | `value` | string | The extracted value as cited. |
-| `pages` | int[] | Source page numbers supporting the value. |
+| `pages` | int[] | Source page numbers supporting the value. Every page appears in `source_pages`; citations without a valid page are dropped. |
 
 ### Example
 
 ```json
 {
   "profile": "legal_case.v1",
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "document_type": "complaint",
   "case_number": "1:26-cv-04821",
   "title": "Acme Holdings LLC v. Doe",
@@ -120,7 +120,7 @@ Used by `deadlines` and `hearing_dates`.
 ```
 
 <Warning>
-  Results are transient. Nini deletes the source after processing and stops serving the result within roughly 24 hours (`result_expires_at`), after which the extraction returns `410`. Retrieve and store what you need promptly.
+  Results are transient. Nini deletes the source after processing and stops serving the result within 24 hours of completion, at `result_expires_at`, after which the extraction returns `410`. Retrieve and store what you need promptly.
 </Warning>
 
 <Tip>

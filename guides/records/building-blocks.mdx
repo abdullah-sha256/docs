@@ -15,11 +15,11 @@ These distinctions help you avoid mistaking several pieces of evidence for sever
 
 ## Step by step
 
-1. Start with the Document: the original uploaded file, such as an invoice PDF or bank statement. One document can contain several transactions.
-2. Look at the Records: individual financial items imported from a source or extracted from a document. A statement with eight transactions can produce eight records.
-3. Inspect the Match: records grouped to support the same financial event. For the example, inspect the invoice record and the bank-payment record together.
+1. Start with the Document: the original uploaded or emailed file, such as an invoice PDF or bank statement. One document can contain several transactions.
+2. Look at the Records: individual financial items imported from a connected source or read from a document. A statement with eight transactions can produce eight records.
+3. Inspect the Match: records grouped to support the same financial event. For the example, inspect the invoice record and the bank-payment record together. A Match has a Bank side and a Books side.
 4. Use a Set when several Matches belong to a wider context, such as a project, supplier or period. Check each member Match as well as the group.
-5. Read statuses separately. Matched means grouped; review state tells you whether an item was dealt with; evidence warnings describe missing or conflicting support; ledger delivery tells you whether it was recorded in Nini's ledger.
+5. Read statuses separately. Ready to approve means the records are grouped but not yet approved; In your books means the Match was approved and added to Nini's ledger; a warning such as No bank transaction yet describes missing or conflicting evidence; the ledger message tells you whether delivery to the ledger succeeded.
 
 <Check>
 **Expected result:** You can explain which file an item came from, what one record represents and why records belong together.
@@ -35,5 +35,5 @@ These distinctions help you avoid mistaking several pieces of evidence for sever
 - A project deposit and final payment are separate events. Their Matches can belong to one Set when the project is the shared context. Check that membership is meaningful and review the evidence in each Match.
 
 <Note>
-Nini's ledger is its own financial record. Posting there does not write back to the connected accounting system. A Finalized or Posted label does not, by itself, clear an evidence warning.
+Nini's ledger is its own financial record. Adding a Match to your books in Nini does not write back to the connected accounting system. An In your books label does not, by itself, clear an evidence warning.
 </Note>

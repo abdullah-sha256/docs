@@ -66,11 +66,6 @@
             "group": "Review and next steps",
             "pages": [
               "guides/review/end-to-end-review",
-              "guides/review/explore",
-              "guides/review/board",
-              "guides/review/dispatches",
-              "guides/review/directory",
-              "guides/review/operations-analytics",
               "guides/review/troubleshooting"
             ]
           }
